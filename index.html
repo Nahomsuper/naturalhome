@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Home & Wellness Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Elegant Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        nat: {
+                            green: '#1E5631',    
+                            lightGreen: '#4C9A2A',
+                            mint: '#EBF4ED',     
+                            cream: '#F4F7F5',    
+                            accent: '#D97706',   
+                            darkBg: '#111827',   
+                            darkCard: '#1F2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .serif-title { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-nat-cream text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:bg-gray-900/90 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-full bg-nat-green flex items-center justify-center text-white text-xl shadow">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold font-serif tracking-tight text-nat-green dark:text-white block">NATURAL</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 block -mt-1" data-lang="store-sub">Home & Wellness Store</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
+                <a href="#home" class="hover:text-nat-green transition" data-lang="nav-home">Home</a>
+                <a href="#products" class="hover:text-nat-green transition" data-lang="nav-products">Products</a>
+                <a href="#about" class="hover:text-nat-green transition" data-lang="nav-about">About Us</a>
+                <a href="#blog" class="hover:text-nat-green transition" data-lang="nav-blog">Wellness Blog</a>
+                <a href="#faq" class="hover:text-nat-green transition" data-lang="nav-faq">FAQs</a>
+                <a href="#contact" class="hover:text-nat-green transition" data-lang="nav-contact">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button id="themeToggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+                <button id="langToggle" onclick="switchLanguage()" class="p-2 px-3 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition text-xs font-bold">AM</button>
+                <button id="cartBtn" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green transition relative">
+                    <i class="fa-solid fa-shopping-basket"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                </button>
+                <button id="authBtn" class="px-4 py-2 rounded-xl bg-nat-green hover:bg-opacity-90 text-white font-bold text-sm shadow transition"><span id="authBtnText" data-lang="btn-login">Login / Register</span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SHOPPING CART BAR -->
+    <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col hidden">
+        <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <h3 class="text-lg font-bold font-serif text-nat-green dark:text-white" data-lang="cart-title">Your Basket</h3>
+            <button id="closeCart" class="text-gray-400 hover:text-black dark:hover:text-white text-xl"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div id="cartItemsContainer" class="p-6 flex-1 overflow-y-auto space-y-4">
+            <p class="text-gray-400 text-center text-sm my-8" id="emptyCartMessage" data-lang="cart-empty">Your shopping basket is currently empty.</p>
+        </div>
+        <div class="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <div class="flex justify-between font-bold text-base mb-4">
+                <span data-lang="cart-total">Total Price:</span>
+                <span id="cartTotalSum" class="text-nat-green dark:text-emerald-400">0.00 ETB</span>
+            </div>
+            <button class="w-full py-3 rounded-xl bg-nat-green text-white font-bold text-sm tracking-wide shadow transition hover:opacity-90" onclick="alert('Order successfully submitted!')" data-lang="cart-checkout">Confirm Delivery</button>
+        </div>
+    </div>
+
+    <!-- LOCALSTORAGE DUAL-AUTH AUTHENTICATION FORM MODAL -->
+    <div id="authModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-full max-w-md rounded-2xl p-8 shadow-2xl relative">
+            <button id="closeAuthModal" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-white"><i class="fa-solid fa-times"></i></button>
+            
+            <!-- Tab switch headers -->
+            <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6 text-sm font-bold">
+                <button id="tabLogin" class="w-1/2 pb-3 text-center border-b-2 border-nat-green text-nat-green" onclick="switchAuthTab('login')" data-lang="tab-login">Login</button>
+                <button id="tabRegister" class="w-1/2 pb-3 text-center text-gray-400 hover:text-gray-600" onclick="switchAuthTab('register')" data-lang="tab-register">Register (Local DB)</button>
+            </div>
+
+            <!-- Login View Form -->
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Password</label>
+                    <input type="password" id="loginPassword" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <button type="submit" class="w-full py-2.5 mt-2 rounded-xl bg-nat-green text-white font-bold text-sm shadow hover:opacity-90 transition" data-lang="login-btn">Login</button>
+            </form>
+
+            <!-- Registration View Form -->
+            <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+                    <input type="text" id="regName" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+                    <input type="email" id="regEmail" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Create Password</label>
+                    <input type="password" id="regPassword" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <button type="submit" class="w-full py-2.5 mt-2 rounded-xl bg-nat-lightGreen text-white font-bold text-sm shadow hover:opacity-90 transition" data-lang="register-btn">Save to LocalStorage DB</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PRODUCT EXTRA DETAIL INFO POPUP MODAL -->
+    <div id="infoModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-full max-w-lg rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-white text-lg"><i class="fa-solid fa-times"></i></button>
+            <div class="flex items-center space-x-4 mb-4">
+                <img id="infoModalImg" src="" alt="product image" class="w-20 h-20 rounded-xl object-cover border border-gray-200 dark:border-gray-700">
+                <div>
+                    <span id="infoModalBadge" class="text-[10px] bg-orange-100 text-nat-accent font-bold px-2 py-0.5 rounded uppercase"></span>
+                    <h3 id="infoModalTitle" class="text-xl font-bold font-serif text-nat-green dark:text-white"></h3>
+                </div>
+            </div>
+            <hr class="border-gray-200 dark:border-gray-700 my-4">
+            <div class="space-y-3 text-xs sm:text-sm">
+                <p class="text-gray-500 leading-relaxed"><strong class="text-gray-700 dark:text-gray-300">Detailed Analytics Matrix:</strong> <span id="infoModalFullDesc"></span></p>
+                <div class="bg-nat-mint/40 dark:bg-gray-900/50 p-4 rounded-xl space-y-2 font-mono text-xs border border-gray-200/50 dark:border-gray-700/50">
+                    <div>🌿 <span class="font-bold">Organic Origin:</span> certified smallholder ecosystem fields</div>
+                    <div>📦 <span class="font-bold">Storage Profile:</span> dark shelf configuration / airtight container</div>
+                    <div>🧪 <span class="font-bold">Testing Log:</span> 0% chemical additives detected</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRESENTATION HERO SECTION -->
+    <section id="home" class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-4 text-left border-l-4 border-nat-green/20 pl-6 lg:pl-10">
+                    <span class="text-2xl sm:text-3xl font-serif text-nat-lightGreen block tracking-wide" data-lang="wellness">Wellness</span>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-serif text-nat-green dark:text-white leading-none font-bold" data-lang="natural-products">Natural <br>Products</h1>
+                    <p class="text-sm sm:text-base font-medium text-nat-green dark:text-emerald-400 pt-2" data-lang="presented-by">Presented by Solomon Tasew</p>
+                </div>
+
+                <div class="lg:col-span-7 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-nat-green text-white p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div>
+                            <h2 class="text-lg font-bold font-serif uppercase tracking-widest">Natural Home & Wellness Store</h2>
+                            <p class="text-xs italic text-nat-mint">Natural Products for a Healthy Life</p>
+                        </div>
+                        <div class="flex space-x-4 text-[10px] font-bold uppercase tracking-wider text-center">
+                            <div><i class="fa-solid fa-circle-check block text-base text-white mb-1"></i> 100% Natural</div>
+                            <div><i class="fa-solid fa-award block text-base text-white mb-1"></i> Premium Quality</div>
+                            <div><i class="fa-solid fa-heart block text-base text-white mb-1"></i> Healthy Choice</div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-nat-mint/40 dark:bg-gray-900/40 text-center">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto" data-lang="hero-desc">We deliver freshness and organic solutions straight to your home doorsteps across Addis Ababa. Explore our product matrix map below.</p>
+                        <a href="#products" class="mt-4 inline-block px-6 py-2.5 rounded-xl bg-nat-green text-white font-bold text-xs shadow-md uppercase tracking-wider hover:opacity-90 transition" data-lang="view-menu">View Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT CATALOGUE WITH FRESH IMAGE MAPPING -->
+    <section id="products" class="py-16 bg-nat-cream dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl sm:text-3xl font-serif text-nat-green dark:text-white font-bold" data-lang="prod-head">Store Product Catalog Matrix</h2>
+            </div>
+            <div id="productGrid" class="space-y-4"></div>
+        </div>
+    </section>
+
+    <!-- STRATEGY BANNER -->
+    <section class="py-12 bg-white dark:bg-gray-800 border-t border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div class="bg-nat-green text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-lg inline-block">Digital Marketing Strategy</div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="flex items-start space-x-3"><span class="p-2 bg-nat-mint text-nat-green rounded-full dark:bg-gray-900"><i class="fa-solid fa-share-nodes"></i></span><div><h4 class="font-bold text-gray-900 dark:text-white">Promote on Social Media</h4><p class="text-gray-500">Facebook, Instagram, TikTok</p></div></div>
+                        <div class="flex items-start space-x-3"><span class="p-2 bg-nat-mint text-nat-green rounded-full dark:bg-gray-900"><i class="fa-solid fa-star"></i></span><div><h4 class="font-bold text-gray-900 dark:text-white">Customer Reviews</h4><p class="text-gray-500">Use reviews and testimonials</p></div></div>
+                        <div class="flex items-start space-x-3"><span class="p-2 bg-nat-mint text-nat-green rounded-full dark:bg-gray-900"><i class="fa-solid fa-image"></i></span><div><h4 class="font-bold text-gray-900 dark:text-white">Post Product Photos & Videos</h4><p class="text-gray-500">Attractive photos and short videos</p></div></div>
+                        <div class="flex items-start space-x-3"><span class="p-2 bg-nat-mint text-nat-green rounded-full dark:bg-gray-900"><i class="fa-solid fa-truck"></i></span><div><h4 class="font-bold text-gray-900 dark:text-white">Home Delivery Service</h4><p class="text-gray-500">Fast and reliable delivery</p></div></div>
+                    </div>
+                </div>
+                <div class="md:col-span-5 p-6 rounded-2xl bg-nat-mint/60 dark:bg-gray-900/60 border border-nat-green/20 text-center space-y-3">
+                    <h3 class="text-lg font-bold text-nat-green dark:text-emerald-400 font-serif uppercase tracking-wider">Order Now!</h3>
+                    <p class="text-[11px] font-semibold text-gray-600 dark:text-gray-400">Healthy Products | Happy Life</p>
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 text-xs text-gray-500">We deliver freshness and wellness straight to your home</div>
+                    <span class="inline-block text-[10px] bg-nat-green text-white font-bold rounded-full px-3 py-1 uppercase tracking-widest">100% Natural</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE WELLNESS INTEGRATION BLOG MODULE -->
+    <section id="blog" class="py-16 bg-nat-cream dark:bg-gray-900">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-10 shadow-lg space-y-4">
+                <div class="flex items-center space-x-2 text-xs text-nat-lightGreen font-bold"><span class="uppercase tracking-wider">Wellness Story Journal</span><span>•</span><span class="text-gray-400 font-mono">June 2026</span></div>
+                <h3 class="text-2xl font-serif font-bold text-nat-green dark:text-white leading-tight">I Thought Honey Was Just Honey Until One Jar Changed My Mind</h3>
+                <div class="text-gray-600 dark:text-gray-300 text-sm space-y-4 leading-relaxed">
+                    <p>For most of my life, Organic Honey was just another item sitting in the kitchen cabinet. I'd use a little in my tea when I had a sore throat and forget about it for months. Then one day, after another busy week powered by coffee and stress, I picked up a jar of Pure Natural Honey from a local farm.</p>
+                    <p class="border-l-4 border-nat-green pl-4 italic text-gray-500 my-2">"I expected sweetness. I wasn't expecting it to completely change how I thought about honey."</p>
+                    <p>The moment I opened the jar, I noticed the rich aroma of wildflowers and nature. This wasn't ordinary honey. This was Farm Fresh Organic Honey, harvested naturally and packed with flavor.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+ <!-- FAQS & CONTACT -->
+    <section id="faq" class="py-16 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- FAQ Accordion Column -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-serif text-nat-green dark:text-white font-bold" data-lang="faq-head">Frequently Asked Questions</h2>
+                        <p class="text-xs text-gray-500 mt-1">Quick answers to common questions about our wellness ecosystem.</p>
+                    </div>
+                    
+                    <div class="space-y-3" id="faqAccordionGroup">
+                        <!-- Q1 -->
+                        <div class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm">
+                            <button class="w-full px-5 py-3.5 text-left font-bold text-sm flex justify-between items-center text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors" onclick="toggleFaq(this)">
+                                <span>Are all your products 100% organic?</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 bg-gray-50 dark:bg-gray-900/50">
+                                <p class="p-4 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Yes, all our offerings are directly sourced from carefully certified local organic farms that skip synthetic pesticides or heavy chemical treatments entirely.</p>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm">
+                            <button class="w-full px-5 py-3.5 text-left font-bold text-sm flex justify-between items-center text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors" onclick="toggleFaq(this)">
+                                <span>Where do you deliver across Addis Ababa?</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 bg-gray-50 dark:bg-gray-900/50">
+                                <p class="p-4 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">We provide door-to-door home delivery servicing all sub-cities in Addis Ababa[cite: 1] (including Bole, Kirkos, Yeka, Lideta, and Nifas Silk). Orders placed early are typically dispatched for same-day delivery arrival.</p>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm">
+                            <button class="w-full px-5 py-3.5 text-left font-bold text-sm flex justify-between items-center text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors" onclick="toggleFaq(this)">
+                                <span>What payment modes do you accept?</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 bg-gray-50 dark:bg-gray-900/50">
+                                <p class="p-4 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">We accommodate mobile wallet transfers (Telebirr, CBE Birr), direct bank deposits, as well as Cash on Delivery (COD) once your basket parcel securely arrives at your residence.</p>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm">
+                            <button class="w-full px-5 py-3.5 text-left font-bold text-sm flex justify-between items-center text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors" onclick="toggleFaq(this)">
+                                <span>What is your return or exchange policy?</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 bg-gray-50 dark:bg-gray-900/50">
+                                <p class="p-4 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">If you are unsatisfied with product fresh freshness parameters or seal structure integrity, notify our support within 24 hours of delivery receipt for a hassle-free swap item replacement or complete credit refund.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact & Feedback Column -->
+                <div class="lg:col-span-5 space-y-6" id="contact">
+                    <div>
+                        <h2 class="text-2xl font-serif text-nat-green dark:text-white font-bold" data-lang="get-in-touch">Get In Touch</h2>
+                        <p class="text-xs text-gray-500 mt-1" data-lang="contact-desc">Have feedback or custom order bulk requests? Message our desk directly.</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); alert('Message successfully logged! Our desk will follow up shortly.'); this.reset();" class="p-6 rounded-2xl bg-nat-mint/40 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700 space-y-4">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1">Your Name</label>
+                            <input type="text" required class="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-xs rounded-xl focus:outline-none focus:border-nat-green text-gray-800 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-xs rounded-xl focus:outline-none focus:border-nat-green text-gray-800 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1">Message Context</label>
+                            <textarea rows="3" required class="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-xs rounded-xl focus:outline-none focus:border-nat-green text-gray-800 dark:text-gray-100 resize-none" placeholder="Write your text instructions here..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-2.5 rounded-xl bg-nat-green hover:bg-opacity-90 text-white font-bold text-xs shadow tracking-wide uppercase transition" data-lang="send-dispatch">
+                            <i class="fa-solid fa-paper-plane mr-1"></i> Send Dispatch
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-nat-mint dark:bg-gray-950 py-10 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+            <p class="text-nat-green dark:text-white font-bold tracking-wide uppercase">Natural Home & Wellness Store — Healthy Products | Happy Life</p>
+            <p>Presented by: <strong>Solomon Tasew</strong> | Email: <strong>solomonqiyas@gmail.com</strong></p>
+        </div>
+    </footer>
+
+    <!-- RUNTIME LOGIC INTERFACES -->
+    <script>
+        const productData = [
+            { id: 1, num: "1", name: "PURE NATURAL HONEY", desc: "Pure natural honey collected from farms. Used for tea, bread, health benefits, and natural sweetening. 🍯", orig: 500, discount: 10, amt: 50, final: 450, icon: "fa-jar", image: "https://dcgfcr1p26ggj.cloudfront.net/wp-content/uploads/2025/02/honey-stock.jpg", longDesc: "Our pure natural honey is raw, unfiltered, and sourced straight from sustainable hives in Ethiopia. Rich in natural antioxidants and enzymes perfect for organic sweetening targets." },
+            { id: 2, num: "2", name: "FRESH COFFEE BEANS", desc: "Fresh roasted coffee beans with rich aroma and strong flavor for home or café use. ☕", orig: 700, discount: 15, amt: 105, final: 595, icon: "fa-mug-hot", image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=200&q=80", longDesc: "Carefully roasted Arabica structural beans profile providing an exceptional flavor complexity. Perfect morning start and energetic metabolic acceleration support profile." },
+            { id: 3, num: "3", name: "HERBAL TEA", desc: "Healthy herbal tea made from natural ingredients to support relaxation and wellness. 🌿", orig: 300, discount: 20, amt: 60, final: 240, icon: "fa-leaf", image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80", longDesc: "A pristine herbal blend containing loose dried chamomile leaves and therapeutic farm botanicals configured specifically to lower evening stress variables safely." },
+            { id: 4, num: "4", name: "NATURAL PEANUT BUTTER", desc: "Natural peanut butter with high protein content, suitable for breakfast and snacks. 🥜", orig: 450, discount: 5, amt: 22.5, final: 427.5, icon: "fa-cubes", image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=200&q=80", longDesc: "Zero added industrial vegetable oils or refined high fructose corn syrups. Straight roasted premium ground peanuts balanced with a tiny fraction of natural sea salt." },
+            { id: 5, num: "5", name: "NATURAL SPICE MIX", desc: "Mixed natural cooking spices for preparing traditional and modern dishes. 🌶️", orig: 250, discount: 12, amt: 30, final: 220, icon: "fa-bowl-rice", image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=200&q=80", longDesc: "Traditional multi-purpose blend composed of organic red pepper, garlic, and unique farm botanicals designed to elevate local stews or general seasoning requirements." }
+        ];
+
+        let currentCart = [];
+        let isLoggedIn = false;
+
+        // Translation dictionary for Amharic & English
+        const translations = {
+            en: {
+                "store-sub": "Home & Wellness Store",
+                "nav-home": "Home",
+                "nav-products": "Products",
+                "nav-about": "About Us",
+                "nav-blog": "Wellness Blog",
+                "nav-faq": "FAQs",
+                "nav-contact": "Contact",
+                "btn-login": "Login / Register",
+                "cart-title": "Your Basket",
+                "cart-empty": "Your shopping basket is currently empty.",
+                "cart-total": "Total Price:",
+                "cart-checkout": "Confirm Delivery",
+                "hero-desc": "We deliver freshness and organic solutions straight to your home doorsteps across Addis Ababa. Explore our product matrix map below.",
+                "prod-head": "Store Product Catalog Matrix",
+                "faq-head": "Frequently Asked Questions",
+                "tab-login": "Login",
+                "tab-register": "Register (Local DB)",
+                "login-btn": "Login",
+                "register-btn": "Save to LocalStorage DB",
+                "wellness": "Wellness",
+                "natural-products": "Natural <br>Products",
+                "presented-by": "Presented by Solomon Tasew",
+                "view-menu": "View Menu",
+                "get-in-touch": "Get In Touch",
+                "contact-desc": "Have feedback or custom order bulk requests? Message our desk directly.",
+                "send-dispatch": "Send Dispatch",
+                "prod-orig": "Original Price",
+                "prod-discount": "Discount",
+                "prod-final": "Final Price",
+                "prod-more-info": "More Info",
+                "prod-add": "Add",
+                "p1-name": "PURE NATURAL HONEY",
+                "p1-desc": "Pure natural honey collected from farms. Used for tea, bread, health benefits, and natural sweetening. 🍯",
+                "p1-long": "Our pure natural honey is raw, unfiltered, and sourced straight from sustainable hives in Ethiopia. Rich in natural antioxidants and enzymes perfect for organic sweetening targets.",
+                "p2-name": "FRESH COFFEE BEANS",
+                "p2-desc": "Fresh roasted coffee beans with rich aroma and strong flavor for home or café use. ☕",
+                "p2-long": "Carefully roasted Arabica structural beans profile providing an exceptional flavor complexity. Perfect morning start and energetic metabolic acceleration support profile.",
+                "p3-name": "HERBAL TEA",
+                "p3-desc": "Healthy herbal tea made from natural ingredients to support relaxation and wellness. 🌿",
+                "p3-long": "A pristine herbal blend containing loose dried chamomile leaves and therapeutic farm botanicals configured specifically to lower evening stress variables safely.",
+                "p4-name": "NATURAL PEANUT BUTTER",
+                "p4-desc": "Natural peanut butter with high protein content, suitable for breakfast and snacks. 🥜",
+                "p4-long": "Zero added industrial vegetable oils or refined high fructose corn syrups. Straight roasted premium ground peanuts balanced with a tiny fraction of natural sea salt.",
+                "p5-name": "NATURAL SPICE MIX",
+                "p5-desc": "Mixed natural cooking spices for preparing traditional and modern dishes. 🌶️",
+                "p5-long": "Traditional multi-purpose blend composed of organic red pepper, garlic, and unique farm botanicals designed to elevate local stews or general seasoning requirements.",
+            },
+            am: {
+                "store-sub": "የቤት እና ዌልነስ መደብር",
+                "nav-home": "መነሻ",
+                "nav-products": "ምርቶች",
+                "nav-about": "ስለ እኛ",
+                "nav-blog": "የጤና ብሎግ",
+                "nav-faq": "ጥያቄዎች",
+                "nav-contact": "መገናኛ",
+                "btn-login": "ግባ / ይመዝገቡ",
+                "cart-title": "የእርስዎ ቅርጫት",
+                "cart-empty": "የእርስዎ የግብዣ ቅርጫት ባዶ ነው።",
+                "cart-total": "ጠቅላላ ዋጋ፦",
+                "cart-checkout": "ትእዛዝ አረጋግጡ",
+                "hero-desc": "ትኩስ እና ኦርጋኒክ ምርቶችን እስከ ቤትዎ ደጅ እናደርሳለን። ከታች ያለውን የምርት ካታሎግ ይመልከቱ።",
+                "prod-head": "የምርት ካታሎግ ማትሪክስ",
+                "faq-head": "በተደጋጋሚ የሚጠየቁ ጥያቄዎች",
+                "tab-login": "ግባ",
+                "tab-register": "ይመዝገቡ (Local DB)",
+                "login-btn": "ግባ",
+                "register-btn": "ወደ LocalStorage DB ያስቀምጡ",
+                "wellness": "ዌልነስ",
+                "natural-products": "ተፈጥሯዊ <br>ምርቶች",
+                "presented-by": "በሰሎሞን ታሰው የቀረበ",
+                "view-menu": "ምናሌ ይመልከቱ",
+                "get-in-touch": "ያግኙን",
+                "contact-desc": "ጥያቄ ወይም የጅምላ ትዕዛዝ አለዎት? በቀጥታ ይጻፉልን።",
+                "send-dispatch": "መልእክት ላክ",
+                "prod-orig": "ዋናው ዋጋ",
+                "prod-discount": "ቅናሽ",
+                "prod-final": "የመጨረሻ ዋጋ",
+                "prod-more-info": "ተጨማሪ መረጃ",
+                "prod-add": "ጨምር",
+                "p1-name": "ንጹህ የተፈጥሮ ማር",
+                "p1-desc": "ከእርሻ የተሰበሰበ ንጹህ የተፈጥሮ ማር። ለሻይ፣ ለዳቦ፣ ለጤና እና ለተፈጥሮ ጣፋጭነት ያገለግላል። 🍯",
+                "p1-long": "የኛ ንጹህ የተፈጥሮ ማር ጥሬ፣ ያልተጣራ እና በኢትዮጵያ ውስጥ ከሚገኙ ዘላቂ ቀፎዎች የተገኘ ነው። ለተፈጥሮ ማጣፈጫ ኢላማዎች ፍጹም የሆኑ የተፈጥሮ አንቲኦክሲደንት እና ኢንዛይሞች የበለፀገ ነው።",
+                "p2-name": "ትኩስ የቡና ፍሬ",
+                "p2-desc": "ትኩስ የተጠበሰ የቡና ፍሬ ከፍተኛ መዓዛ እና ጠንካራ ጣዕም ያለው። ☕",
+                "p2-long": "ልዩ የሆነ የጣዕም ውስብስብነት የሚሰጥ በጥንቃቄ የተጠበሰ የአረቢካ ቡና። ለጠዋት ጅምር እና ለኃይል ሜታቦሊክ ማጎልበቻ ፍጹም ነው።",
+                "p3-name": "ከዕፅዋት የተቀመመ ሻይ",
+                "p3-desc": "ለመዝናናት እና ለጤንነት የሚረዳ ከተፈጥሮ ንጥረ ነገሮች የተሰራ ጤናማ ሻይ። 🌿",
+                "p3-long": "የምሽት ውጥረት ተለዋዋጮችን በደህና ለመቀነስ በልዩ ሁኔታ የተዋቀረ የካሞሚል ቅጠሎች እና የህክምና እፅዋት ድብልቅ።",
+                "p4-name": "የተፈጥሮ ኦቾሎኒ ቅቤ",
+                "p4-desc": "ከፍተኛ ፕሮቲን ያለው የተፈጥሮ ኦቾሎኒ ቅቤ። ለቁርስ እና ለመክሸር ተስማሚ። 🥜",
+                "p4-long": "ምንም የተጨመሩ የኢንዱስትሪ የአትክልት ዘይቶች ወይም የተጣራ ከፍተኛ የፍራፍሬ ቡናማ ሽሮፕ የሉትም። ከተፈጥሮ የባህር ጨው ጋር የተመጣጠነ የተጠበሰ ከፍተኛ ኦቾሎኒ።",
+                "p5-name": "የተፈጥሮ ቅመም ድብልቅ",
+                "p5-desc": "ባህላዊ እና ዘመናዊ ምግቦችን ለማብሰል የተደባለቀ የተፈጥሮ ቅመም። 🌶️",
+                "p5-long": "የአካባቢ ወጥ ወይም አጠቃላይ የማጣፈጫ ፍላጎቶችን ከፍ ለማድረግ ኦርጋኒክ በሆነ ቀይ በርበሬ፣ ነጭ ሽንኩርት እና ሌሎች ቅመሞች የተዋቀረ ባህላዊ ድብልቅ።",
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_language') || 'en';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site_language', lang);
+            const btn = document.getElementById('langToggle');
+            if (btn) btn.innerText = lang === 'en' ? 'AM' : 'EN';
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            renderRowProducts();
+        }
+
+        function switchLanguage() {
+            applyLanguage(currentLang === 'en' ? 'am' : 'en');
+        }
+
+        function t(key) {
+            return translations[currentLang] && translations[currentLang][key] !== undefined
+                ? translations[currentLang][key]
+                : (translations['en'][key] || key);
+        }
+
+        // Dynamic Product Generation Grid Fixing Bug inside mm.png
+        function renderRowProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            
+            productData.forEach(prod => {
+                const row = document.createElement('div');
+                row.className = "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm flex flex-col md:flex-row items-center text-xs text-gray-700 dark:text-gray-300 transition-all duration-200 hover:shadow-md";
+                const pName = t('p' + prod.id + '-name');
+                const pDesc = t('p' + prod.id + '-desc');
+                row.innerHTML = `
+                    <div class="bg-nat-green text-white font-bold px-4 py-3 md:py-14 flex items-center justify-center text-sm w-full md:w-12 shrink-0">
+                        ${prod.num}
+                    </div>
+                    
+                    <div class="w-full md:w-24 h-24 shrink-0 bg-gray-100 dark:bg-gray-900 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700">
+                        <img src="${prod.image}" alt="${pName}" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="p-4 flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 items-center w-full">
+                        <div class="md:col-span-6 space-y-1">
+                            <h3 class="font-bold text-nat-green dark:text-white tracking-wide text-xs sm:text-sm uppercase flex items-center">
+                                <i class="fa-solid ${prod.icon} mr-2 text-nat-lightGreen"></i> ${pName}
+                            </h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">${pDesc}</p>
+                            
+                            <button onclick="showMoreInfo(${prod.id})" class="text-[10px] text-nat-lightGreen hover:underline font-bold tracking-wide uppercase mt-1 inline-flex items-center">
+                                <i class="fa-solid fa-circle-info mr-1"></i> ${t('prod-more-info')}
+                            </button>
+                        </div>
+                        
+                        <div class="md:col-span-2 text-center border-t md:border-t-0 md:border-l md:border-r border-gray-100 dark:border-gray-700 py-1">
+                            <span class="block text-[10px] text-gray-400 uppercase">${t('prod-orig')}</span>
+                            <span class="font-bold font-mono text-gray-900 dark:text-white">${prod.orig} ETB</span>
+                        </div>
+
+                        <div class="md:col-span-2 text-center py-1">
+                            <span class="block text-[10px] text-gray-400 uppercase">${t('prod-discount')}</span>
+                            <span class="inline-block bg-orange-100 text-nat-accent text-[10px] font-bold px-2 py-0.5 rounded uppercase">${prod.discount}% OFF</span>
+                            <span class="block font-mono text-[11px] text-gray-500 mt-0.5">${prod.amt} ETB</span>
+                        </div>
+
+                        <div class="md:col-span-2 bg-nat-green text-white rounded-lg p-2 text-center shadow-inner">
+                            <span class="block text-[9px] uppercase opacity-70">${t('prod-final')}</span>
+                            <span class="font-bold font-mono text-sm">${prod.final} ETB</span>
+                        </div>
+                    </div>
+                    <div class="p-4 w-full md:w-auto border-t md:border-t-0 md:border-l border-gray-100 dark:border-gray-700 text-center flex md:flex-col justify-center items-center gap-2">
+                        <button onclick="addToBasket(${prod.id})" class="w-full md:w-auto px-4 py-2 rounded-lg bg-nat-mint text-nat-green font-bold hover:bg-nat-green hover:text-white transition text-[11px] whitespace-nowrap">
+                            <i class="fa-solid fa-cart-plus mr-1"></i> ${t('prod-add')}
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(row);
+            });
+        }
+
+        // Detailed Modal Trigger Architecture
+        function showMoreInfo(id) {
+            const item = productData.find(p => p.id === id);
+            if (!item) return;
+            document.getElementById('infoModalTitle').innerHTML = t('p' + id + '-name');
+            document.getElementById('infoModalBadge').innerText = `${item.discount}% ${t('prod-discount')}`;
+            document.getElementById('infoModalFullDesc').innerText = t('p' + id + '-long');
+            document.getElementById('infoModalImg').src = item.image;
+            
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeInfoModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Dual Auth Tab Switching Mechanics
+        function switchAuthTab(mode) {
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+
+            if(mode === 'login') {
+                tabLogin.className = "w-1/2 pb-3 text-center border-b-2 border-nat-green text-nat-green";
+                tabRegister.className = "w-1/2 pb-3 text-center text-gray-400 hover:text-gray-600";
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                tabRegister.className = "w-1/2 pb-3 text-center border-b-2 border-nat-lightGreen text-nat-lightGreen";
+                tabLogin.className = "w-1/2 pb-3 text-center text-gray-400 hover:text-gray-600";
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        // Registration form putting credentials into LocalStorage DB Schema Matrix
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value.trim().toLowerCase();
+            const pass = document.getElementById('regPassword').value;
+
+            let userDb = JSON.parse(localStorage.getItem('users_database')) || [];
+            
+            if(userDb.some(u => u.email === email)) {
+                alert('Email mapping already indexed inside DB system! Proceed to login tab.');
+                return;
+            }
+
+            userDb.push({ name, email, password: pass });
+            localStorage.setItem('users_database', JSON.stringify(userDb));
+            alert('Account written successfully to LocalStorage database matrix! You can log in now.');
+            switchAuthTab('login');
+        }
+
+        // Login reading and evaluating credentials against LocalStorage database
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const pass = document.getElementById('loginPassword').value;
+
+            let userDb = JSON.parse(localStorage.getItem('users_database')) || [];
+            const matchedUser = userDb.find(u => u.email === email && u.password === pass);
+
+            if(!matchedUser) {
+                alert('Authentication failure. Invalid credentials or missing index profile inside local DB context.');
+                return;
+            }
+
+            isLoggedIn = true;
+            document.getElementById('authBtnText').innerText = `Hello, ${matchedUser.name.split(' ')[0]}`;
+            closeAuthModalView();
+        }
+
+        function closeAuthModalView() {
+            const modal = document.getElementById('authModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function addToBasket(id) {
+            const match = productData.find(p => p.id === id);
+            const exists = currentCart.find(item => item.id === id);
+            if(exists) { exists.quantity += 1; } else { currentCart.push({...match, quantity: 1}); }
+            updateCartUi();
+        }
+
+        function removeFromCart(id) {
+            currentCart = currentCart.filter(item => item.id !== id);
+            updateCartUi();
+        }
+
+        function updateCartUi() {
+            const countBadge = document.getElementById('cartCount');
+            const container = document.getElementById('cartItemsContainer');
+            const totalSumEl = document.getElementById('cartTotalSum');
+            const emptyMsg = document.getElementById('emptyCartMessage');
+            
+            let totalCount = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            let totalSum = currentCart.reduce((sum, item) => sum + (item.final * item.quantity), 0);
+            
+            if(totalCount > 0) {
+                countBadge.innerText = totalCount;
+                countBadge.classList.remove('hidden');
+                emptyMsg.classList.add('hidden');
+            } else {
+                countBadge.classList.add('hidden');
+                emptyMsg.classList.remove('hidden');
+            }
+            
+            container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+            
+            currentCart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = "cart-item-row flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-xs text-gray-800 dark:text-gray-200";
+                row.innerHTML = `
+                    <div>
+                        <span class="font-bold block">${item.name}</span>
+                        <span class="text-nat-lightGreen font-mono">${item.final} ETB x ${item.quantity}</span>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash-can"></i></button>
+                `;
+                container.appendChild(row);
+            });
+            totalSumEl.innerText = `${totalSum.toFixed(2)} ETB`;
+        }
+
+        function toggleFaq(button) {
+            const body = button.nextElementSibling;
+            if(body.style.maxHeight && body.style.maxHeight !== '0px') {
+                body.style.maxHeight = '0px';
+            } else {
+                body.style.maxHeight = body.scrollHeight + 'px';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRowProducts();
+            applyLanguage(currentLang);
+            
+            const cartSidebar = document.getElementById('cartSidebar');
+            document.getElementById('cartBtn').addEventListener('click', () => {
+                cartSidebar.classList.remove('hidden');
+                setTimeout(() => cartSidebar.classList.remove('translate-x-full'), 10);
+            });
+            document.getElementById('closeCart').addEventListener('click', () => {
+                cartSidebar.classList.add('translate-x-full');
+                setTimeout(() => cartSidebar.classList.add('hidden'), 300);
+            });
+
+            const authModal = document.getElementById('authModal');
+            document.getElementById('authBtn').addEventListener('click', () => {
+                if(isLoggedIn) {
+                    isLoggedIn = false;
+                    document.getElementById('authBtnText').innerText = 'Login / Register';
+                    return;
+                }
+                authModal.classList.remove('hidden');
+                setTimeout(() => authModal.classList.remove('opacity-0'), 10);
+            });
+            document.getElementById('closeAuthModal').addEventListener('click', closeAuthModalView);
+
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                const htmlTag = document.documentElement;
+                const themeIcon = document.getElementById('themeIcon');
+                if (htmlTag.classList.contains('dark')) {
+                    htmlTag.classList.remove('dark');
+                    themeIcon.className = "fa-solid fa-moon";
+                } else {
+                    htmlTag.classList.add('dark');
+                    themeIcon.className = "fa-solid fa-sun";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
