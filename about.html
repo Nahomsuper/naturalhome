@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Natural Home & Wellness Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Elegant Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        nat: {
+                            green: '#1E5631',    
+                            lightGreen: '#4C9A2A',
+                            mint: '#EBF4ED',     
+                            cream: '#F4F7F5',    
+                            accent: '#D97706',   
+                            darkBg: '#111827',   
+                            darkCard: '#1F2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .serif-title { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-nat-cream text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:bg-gray-900/90 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-full bg-nat-green flex items-center justify-center text-white text-xl shadow">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold font-serif tracking-tight text-nat-green dark:text-white block">NATURAL</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 block -mt-1" data-lang="store-sub">Home & Wellness Store</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
+                <a href="index.html" class="hover:text-nat-green transition" data-lang="nav-home">Home</a>
+                <a href="index.html#products" class="hover:text-nat-green transition" data-lang="nav-products">Products</a>
+                <a href="about.html" class="hover:text-nat-green transition text-nat-green dark:text-nat-lightGreen" data-lang="nav-about">About Us</a>
+                <a href="index.html#blog" class="hover:text-nat-green transition" data-lang="nav-blog">Wellness</a>
+                <a href="index.html#faq" class="hover:text-nat-green transition" data-lang="nav-faq">FAQs</a>
+                <a href="index.html#contact" class="hover:text-nat-green transition" data-lang="nav-contact">Contact</a>
+                <a href="blog.html" class="hover:text-nat-green transition" data-lang="nav-blog-page">Blog</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button id="hamburgerBtn" class="md:hidden p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green transition" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <button id="themeToggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+                <button id="langToggle" onclick="switchLanguage()" class="p-2 px-3 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition text-xs font-bold">AM</button>
+                <button id="cartBtn" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green transition relative">
+                    <i class="fa-solid fa-shopping-basket"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                </button>
+                <button id="authBtn" class="px-4 py-2 rounded-xl bg-nat-green hover:bg-opacity-90 text-white font-bold text-sm shadow transition"><span id="authBtnText" data-lang="btn-login">Login / Register</span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-lg">
+        <div class="px-4 py-3 space-y-1">
+            <a href="index.html" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-home">Home</a>
+            <a href="index.html#products" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-products">Products</a>
+            <a href="about.html" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-about">About Us</a>
+            <a href="index.html#blog" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-blog">Wellness</a>
+            <a href="index.html#faq" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-faq">FAQs</a>
+            <a href="index.html#contact" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-contact">Contact</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-blog-page">Blog</a>
+        </div>
+    </div>
+
+    <!-- SHOPPING CART BAR -->
+    <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col hidden">
+        <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <h3 class="text-lg font-bold font-serif text-nat-green dark:text-white" data-lang="cart-title">Your Basket</h3>
+            <button id="closeCart" class="text-gray-400 hover:text-black dark:hover:text-white text-xl"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div id="cartItemsContainer" class="p-6 flex-1 overflow-y-auto space-y-4">
+            <p class="text-gray-400 text-center text-sm my-8" id="emptyCartMessage" data-lang="cart-empty">Your shopping basket is currently empty.</p>
+        </div>
+        <div class="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <div class="flex justify-between font-bold text-base mb-4">
+                <span data-lang="cart-total">Total Price:</span>
+                <span id="cartTotalSum" class="text-nat-green dark:text-emerald-400">0.00 ETB</span>
+            </div>
+            <button class="w-full py-3 rounded-xl bg-nat-green text-white font-bold text-sm tracking-wide shadow transition hover:opacity-90" onclick="alert('Order successfully submitted!')" data-lang="cart-checkout">Confirm Delivery</button>
+        </div>
+    </div>
+
+    <!-- LOCALSTORAGE DUAL-AUTH AUTHENTICATION FORM MODAL -->
+    <div id="authModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-full max-w-md rounded-2xl p-8 shadow-2xl relative">
+            <button id="closeAuthModal" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-white"><i class="fa-solid fa-times"></i></button>
+            
+            <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6 text-sm font-bold">
+                <button id="tabLogin" class="w-1/2 pb-3 text-center border-b-2 border-nat-green text-nat-green" onclick="switchAuthTab('login')" data-lang="tab-login">Login</button>
+                <button id="tabRegister" class="w-1/2 pb-3 text-center text-gray-400 hover:text-gray-600" onclick="switchAuthTab('register')" data-lang="tab-register">Register (Local DB)</button>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Password</label>
+                    <input type="password" id="loginPassword" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <button type="submit" class="w-full py-2.5 mt-2 rounded-xl bg-nat-green text-white font-bold text-sm shadow hover:opacity-90 transition" data-lang="login-btn">Login</button>
+            </form>
+
+            <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+                    <input type="text" id="regName" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+                    <input type="email" id="regEmail" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Create Password</label>
+                    <input type="password" id="regPassword" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:border-nat-green">
+                </div>
+                <button type="submit" class="w-full py-2.5 mt-2 rounded-xl bg-nat-lightGreen text-white font-bold text-sm shadow hover:opacity-90 transition" data-lang="register-btn">Save to LocalStorage DB</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PRODUCT EXTRA DETAIL INFO POPUP MODAL -->
+    <div id="infoModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-full max-w-lg rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-white text-lg"><i class="fa-solid fa-times"></i></button>
+            <div class="flex items-center space-x-4 mb-4">
+                <img id="infoModalImg" src="" alt="product image" class="w-20 h-20 rounded-xl object-cover border border-gray-200 dark:border-gray-700">
+                <div>
+                    <span id="infoModalBadge" class="text-[10px] bg-orange-100 text-nat-accent font-bold px-2 py-0.5 rounded uppercase"></span>
+                    <h3 id="infoModalTitle" class="text-xl font-bold font-serif text-nat-green dark:text-white"></h3>
+                </div>
+            </div>
+            <hr class="border-gray-200 dark:border-gray-700 my-4">
+            <div class="space-y-3 text-xs sm:text-sm">
+                <p class="text-gray-500 leading-relaxed"><strong class="text-gray-700 dark:text-gray-300">Detailed Analytics Matrix:</strong> <span id="infoModalFullDesc"></span></p>
+                <div class="bg-nat-mint/40 dark:bg-gray-900/50 p-4 rounded-xl space-y-2 font-mono text-xs border border-gray-200/50 dark:border-gray-700/50">
+                    <div>🌿 <span class="font-bold">Organic Origin:</span> certified smallholder ecosystem fields</div>
+                    <div>📦 <span class="font-bold">Storage Profile:</span> dark shelf configuration / airtight container</div>
+                    <div>🧪 <span class="font-bold">Testing Log:</span> 0% chemical additives detected</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT HERO SECTION -->
+    <section class="relative overflow-hidden pt-16 pb-16 lg:pt-20 lg:pb-20 border-b border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-xs font-bold uppercase tracking-widest text-nat-lightGreen">About Us</span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif text-nat-green dark:text-white font-bold mt-3 mb-4">About Wellnessss Natural Products</h1>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">Wellnessss Natural Products was founded with a simple goal: to make healthy, natural, and organic products accessible to everyone.</p>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed mt-3">We work directly with local farmers and trusted suppliers to provide products that support wellness and sustainable living. Our commitment to quality, customer satisfaction, and environmental responsibility guides everything we do.</p>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="py-16 bg-nat-cream dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-md text-center">
+                    <div class="h-16 w-16 rounded-full bg-nat-mint text-nat-green flex items-center justify-center mx-auto mb-5 text-2xl"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3 class="text-xl font-serif font-bold text-nat-green dark:text-white mb-3">Our Mission</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">To promote healthy lifestyles by providing premium natural products that improve everyday wellness.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-md text-center">
+                    <div class="h-16 w-16 rounded-full bg-nat-mint text-nat-green flex items-center justify-center mx-auto mb-5 text-2xl"><i class="fa-solid fa-eye"></i></div>
+                    <h3 class="text-xl font-serif font-bold text-nat-green dark:text-white mb-3">Our Vision</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">To become Ethiopia's most trusted natural wellness brand by offering high-quality products and exceptional customer service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="py-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl sm:text-3xl font-serif text-nat-green dark:text-white font-bold">Our Core Values</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-nat-cream dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="h-12 w-12 rounded-full bg-nat-green text-white flex items-center justify-center mx-auto mb-4 text-lg"><i class="fa-solid fa-check"></i></div>
+                    <h3 class="font-bold text-nat-green dark:text-white text-sm mb-2">Quality</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">We ensure every product meets strict quality standards.</p>
+                </div>
+                <div class="bg-nat-cream dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="h-12 w-12 rounded-full bg-nat-green text-white flex items-center justify-center mx-auto mb-4 text-lg"><i class="fa-solid fa-recycle"></i></div>
+                    <h3 class="font-bold text-nat-green dark:text-white text-sm mb-2">Sustainability</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">We support environmentally responsible farming and sourcing practices.</p>
+                </div>
+                <div class="bg-nat-cream dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="h-12 w-12 rounded-full bg-nat-green text-white flex items-center justify-center mx-auto mb-4 text-lg"><i class="fa-solid fa-handshake"></i></div>
+                    <h3 class="font-bold text-nat-green dark:text-white text-sm mb-2">Integrity</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">We operate with honesty, transparency, and respect for our customers.</p>
+                </div>
+                <div class="bg-nat-cream dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="h-12 w-12 rounded-full bg-nat-green text-white flex items-center justify-center mx-auto mb-4 text-lg"><i class="fa-solid fa-users"></i></div>
+                    <h3 class="font-bold text-nat-green dark:text-white text-sm mb-2">Customer Focus</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Customer satisfaction is at the center of every decision we make.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-nat-mint dark:bg-gray-950 py-10 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+            <p class="text-nat-green dark:text-white font-bold tracking-wide uppercase">Natural Home & Wellness Store — Healthy Products | Happy Life</p>
+            <p>Presented by: <strong>Solomon Tasew</strong> | Email: <strong>solomonqiyas@gmail.com</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        const productData = [
+            { id: 1, num: "1", name: "PURE NATURAL HONEY", desc: "Pure natural honey collected from farms. Used for tea, bread, health benefits, and natural sweetening. 🍯", orig: 500, discount: 10, amt: 50, final: 450, icon: "fa-jar", image: "https://dcgfcr1p26ggj.cloudfront.net/wp-content/uploads/2025/02/honey-stock.jpg", longDesc: "Our pure natural honey is raw, unfiltered, and sourced straight from sustainable hives in Ethiopia. Rich in natural antioxidants and enzymes perfect for organic sweetening targets." },
+            { id: 2, num: "2", name: "FRESH COFFEE BEANS", desc: "Fresh roasted coffee beans with rich aroma and strong flavor for home or café use. ☕", orig: 700, discount: 15, amt: 105, final: 595, icon: "fa-mug-hot", image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=200&q=80", longDesc: "Carefully roasted Arabica structural beans profile providing an exceptional flavor complexity. Perfect morning start and energetic metabolic acceleration support profile." },
+            { id: 3, num: "3", name: "HERBAL TEA", desc: "Healthy herbal tea made from natural ingredients to support relaxation and wellness. 🌿", orig: 300, discount: 20, amt: 60, final: 240, icon: "fa-leaf", image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80", longDesc: "A pristine herbal blend containing loose dried chamomile leaves and therapeutic farm botanicals configured specifically to lower evening stress variables safely." },
+            { id: 4, num: "4", name: "NATURAL PEANUT BUTTER", desc: "Natural peanut butter with high protein content, suitable for breakfast and snacks. 🥜", orig: 450, discount: 5, amt: 22.5, final: 427.5, icon: "fa-cubes", image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=200&q=80", longDesc: "Zero added industrial vegetable oils or refined high fructose corn syrups. Straight roasted premium ground peanuts balanced with a tiny fraction of natural sea salt." },
+            { id: 5, num: "5", name: "NATURAL SPICE MIX", desc: "Mixed natural cooking spices for preparing traditional and modern dishes. 🌶️", orig: 250, discount: 12, amt: 30, final: 220, icon: "fa-bowl-rice", image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=200&q=80", longDesc: "Traditional multi-purpose blend composed of organic red pepper, garlic, and unique farm botanicals designed to elevate local stews or general seasoning requirements." }
+        ];
+
+        let currentCart = [];
+        let isLoggedIn = false;
+
+        const translations = {
+            en: {
+                "store-sub": "Home & Wellness Store",
+                "nav-home": "Home",
+                "nav-products": "Products",
+                "nav-about": "About Us",
+                "nav-blog": "Wellness",
+                "nav-blog-page": "Blog",
+                "nav-faq": "FAQs",
+                "nav-contact": "Contact",
+                "btn-login": "Login / Register",
+                "cart-title": "Your Basket",
+                "cart-empty": "Your shopping basket is currently empty.",
+                "cart-total": "Total Price:",
+                "cart-checkout": "Confirm Delivery",
+                "tab-login": "Login",
+                "tab-register": "Register (Local DB)",
+                "login-btn": "Login",
+                "register-btn": "Save to LocalStorage DB",
+            },
+            am: {
+                "store-sub": "የቤት እና ዌልነስ መደብር",
+                "nav-home": "መነሻ",
+                "nav-products": "ምርቶች",
+                "nav-about": "ስለ እኛ",
+                "nav-blog": "ዌልነስ",
+                "nav-blog-page": "ብሎግ",
+                "nav-faq": "ጥያቄዎች",
+                "nav-contact": "መገናኛ",
+                "btn-login": "ግባ / ይመዝገቡ",
+                "cart-title": "የእርስዎ ቅርጫት",
+                "cart-empty": "የእርስዎ የግብዣ ቅርጫት ባዶ ነው።",
+                "cart-total": "ጠቅላላ ዋጋ፦",
+                "cart-checkout": "ትእዛዝ አረጋግጡ",
+                "tab-login": "ግባ",
+                "tab-register": "ይመዝገቡ (Local DB)",
+                "login-btn": "ግባ",
+                "register-btn": "ወደ LocalStorage DB ያስቀምጡ",
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_language') || 'en';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site_language', lang);
+            const btn = document.getElementById('langToggle');
+            if (btn) btn.innerText = lang === 'en' ? 'AM' : 'EN';
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        function switchLanguage() {
+            applyLanguage(currentLang === 'en' ? 'am' : 'en');
+        }
+
+        function t(key) {
+            return translations[currentLang] && translations[currentLang][key] !== undefined
+                ? translations[currentLang][key]
+                : (translations['en'][key] || key);
+        }
+
+        function showMoreInfo(id) {
+            const item = productData.find(p => p.id === id);
+            if (!item) return;
+            document.getElementById('infoModalTitle').innerHTML = t('p' + id + '-name');
+            document.getElementById('infoModalBadge').innerText = `${item.discount}% Discount`;
+            document.getElementById('infoModalFullDesc').innerText = t('p' + id + '-long');
+            document.getElementById('infoModalImg').src = item.image;
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeInfoModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function switchAuthTab(mode) {
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            if(mode === 'login') {
+                tabLogin.className = "w-1/2 pb-3 text-center border-b-2 border-nat-green text-nat-green";
+                tabRegister.className = "w-1/2 pb-3 text-center text-gray-400 hover:text-gray-600";
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                tabRegister.className = "w-1/2 pb-3 text-center border-b-2 border-nat-lightGreen text-nat-lightGreen";
+                tabLogin.className = "w-1/2 pb-3 text-center text-gray-400 hover:text-gray-600";
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value.trim().toLowerCase();
+            const pass = document.getElementById('regPassword').value;
+            let userDb = JSON.parse(localStorage.getItem('users_database')) || [];
+            if(userDb.some(u => u.email === email)) {
+                alert('Email mapping already indexed inside DB system! Proceed to login tab.');
+                return;
+            }
+            userDb.push({ name, email, password: pass });
+            localStorage.setItem('users_database', JSON.stringify(userDb));
+            alert('Account written successfully to LocalStorage database matrix! You can log in now.');
+            switchAuthTab('login');
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const pass = document.getElementById('loginPassword').value;
+            let userDb = JSON.parse(localStorage.getItem('users_database')) || [];
+            const matchedUser = userDb.find(u => u.email === email && u.password === pass);
+            if(!matchedUser) {
+                alert('Authentication failure. Invalid credentials or missing index profile inside local DB context.');
+                return;
+            }
+            isLoggedIn = true;
+            document.getElementById('authBtnText').innerText = `Hello, ${matchedUser.name.split(' ')[0]}`;
+            closeAuthModalView();
+        }
+
+        function closeAuthModalView() {
+            const modal = document.getElementById('authModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function addToBasket(id) {
+            const match = productData.find(p => p.id === id);
+            const exists = currentCart.find(item => item.id === id);
+            if(exists) { exists.quantity += 1; } else { currentCart.push({...match, quantity: 1}); }
+            updateCartUi();
+        }
+
+        function removeFromCart(id) {
+            currentCart = currentCart.filter(item => item.id !== id);
+            updateCartUi();
+        }
+
+        function updateCartUi() {
+            const countBadge = document.getElementById('cartCount');
+            const container = document.getElementById('cartItemsContainer');
+            const totalSumEl = document.getElementById('cartTotalSum');
+            const emptyMsg = document.getElementById('emptyCartMessage');
+            let totalCount = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            let totalSum = currentCart.reduce((sum, item) => sum + (item.final * item.quantity), 0);
+            if(totalCount > 0) {
+                countBadge.innerText = totalCount;
+                countBadge.classList.remove('hidden');
+                emptyMsg.classList.add('hidden');
+            } else {
+                countBadge.classList.add('hidden');
+                emptyMsg.classList.remove('hidden');
+            }
+            container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+            currentCart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = "cart-item-row flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-xs text-gray-800 dark:text-gray-200";
+                row.innerHTML = `
+                    <div>
+                        <span class="font-bold block">${item.name}</span>
+                        <span class="text-nat-lightGreen font-mono">${item.final} ETB x ${item.quantity}</span>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash-can"></i></button>
+                `;
+                container.appendChild(row);
+            });
+            totalSumEl.innerText = `${totalSum.toFixed(2)} ETB`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage(currentLang);
+            
+            const cartSidebar = document.getElementById('cartSidebar');
+            document.getElementById('cartBtn').addEventListener('click', () => {
+                cartSidebar.classList.remove('hidden');
+                setTimeout(() => cartSidebar.classList.remove('translate-x-full'), 10);
+            });
+            document.getElementById('closeCart').addEventListener('click', () => {
+                cartSidebar.classList.add('translate-x-full');
+                setTimeout(() => cartSidebar.classList.add('hidden'), 300);
+            });
+
+            const authModal = document.getElementById('authModal');
+            document.getElementById('authBtn').addEventListener('click', () => {
+                if(isLoggedIn) {
+                    isLoggedIn = false;
+                    document.getElementById('authBtnText').innerText = 'Login / Register';
+                    return;
+                }
+                authModal.classList.remove('hidden');
+                setTimeout(() => authModal.classList.remove('opacity-0'), 10);
+            });
+            document.getElementById('closeAuthModal').addEventListener('click', closeAuthModalView);
+
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                const htmlTag = document.documentElement;
+                const themeIcon = document.getElementById('themeIcon');
+                if (htmlTag.classList.contains('dark')) {
+                    htmlTag.classList.remove('dark');
+                    themeIcon.className = "fa-solid fa-moon";
+                } else {
+                    htmlTag.classList.add('dark');
+                    themeIcon.className = "fa-solid fa-sun";
+                }
+            });
+
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = hamburgerBtn.querySelector('i');
+                    icon.className = "fa-solid fa-bars";
+                });
+            });
+        });
+    </script>
+</body>
+</html>
