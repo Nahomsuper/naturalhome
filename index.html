@@ -60,12 +60,16 @@
                 <a href="#home" class="hover:text-nat-green transition" data-lang="nav-home">Home</a>
                 <a href="#products" class="hover:text-nat-green transition" data-lang="nav-products">Products</a>
                 <a href="#about" class="hover:text-nat-green transition" data-lang="nav-about">About Us</a>
-                <a href="#blog" class="hover:text-nat-green transition" data-lang="nav-blog">Wellness Blog</a>
+                <a href="#blog" class="hover:text-nat-green transition" data-lang="nav-blog">Wellness</a>
                 <a href="#faq" class="hover:text-nat-green transition" data-lang="nav-faq">FAQs</a>
                 <a href="#contact" class="hover:text-nat-green transition" data-lang="nav-contact">Contact</a>
+                <a href="blog.html" class="hover:text-nat-green transition" data-lang="nav-blog-page">Blog</a>
             </nav>
 
             <div class="flex items-center space-x-3">
+                <button id="hamburgerBtn" class="md:hidden p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green transition" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <button id="themeToggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
                 <button id="langToggle" onclick="switchLanguage()" class="p-2 px-3 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition text-xs font-bold">AM</button>
                 <button id="cartBtn" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green transition relative">
@@ -76,6 +80,19 @@
             </div>
         </div>
     </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-lg">
+        <div class="px-4 py-3 space-y-1">
+            <a href="#home" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-home">Home</a>
+            <a href="#products" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-products">Products</a>
+            <a href="#about" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-about">About Us</a>
+            <a href="#blog" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-blog">Wellness</a>
+            <a href="#faq" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-faq">FAQs</a>
+            <a href="#contact" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-contact">Contact</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition" data-lang="nav-blog-page">Blog</a>
+        </div>
+    </div>
 
     <!-- SHOPPING CART BAR -->
     <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col hidden">
@@ -356,7 +373,8 @@
                 "nav-home": "Home",
                 "nav-products": "Products",
                 "nav-about": "About Us",
-                "nav-blog": "Wellness Blog",
+                "nav-blog": "Wellness",
+                "nav-blog-page": "Blog",
                 "nav-faq": "FAQs",
                 "nav-contact": "Contact",
                 "btn-login": "Login / Register",
@@ -404,7 +422,8 @@
                 "nav-home": "መነሻ",
                 "nav-products": "ምርቶች",
                 "nav-about": "ስለ እኛ",
-                "nav-blog": "የጤና ብሎግ",
+                "nav-blog": "ዌልነስ",
+                "nav-blog-page": "ብሎግ",
                 "nav-faq": "ጥያቄዎች",
                 "nav-contact": "መገናኛ",
                 "btn-login": "ግባ / ይመዝገቡ",
@@ -709,6 +728,23 @@
                     htmlTag.classList.add('dark');
                     themeIcon.className = "fa-solid fa-sun";
                 }
+            });
+
+            // Hamburger menu toggle
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = hamburgerBtn.querySelector('i');
+                    icon.className = "fa-solid fa-bars";
+                });
             });
         });
     </script>
