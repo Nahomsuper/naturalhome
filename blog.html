@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Blog - Natural Home & Wellness Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        nat: {
+                            green: '#1E5631',
+                            lightGreen: '#4C9A2A',
+                            mint: '#EBF4ED',
+                            cream: '#F4F7F5',
+                            accent: '#D97706',
+                            darkBg: '#111827',
+                            darkCard: '#1F2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .serif-title { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-nat-cream text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:bg-gray-900/90 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-full bg-nat-green flex items-center justify-center text-white text-xl shadow">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold font-serif tracking-tight text-nat-green dark:text-white block">NATURAL</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 block -mt-1">Home & Wellness Store</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
+                <a href="index.html#home" class="hover:text-nat-green transition">Home</a>
+                <a href="index.html#products" class="hover:text-nat-green transition">Products</a>
+                <a href="index.html#about" class="hover:text-nat-green transition">About Us</a>
+                <a href="index.html#blog" class="hover:text-nat-green transition">Wellness</a>
+                <a href="index.html#faq" class="hover:text-nat-green transition">FAQs</a>
+                <a href="index.html#contact" class="hover:text-nat-green transition">Contact</a>
+                <a href="#" class="text-nat-green border-b-2 border-nat-green">Blog</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button id="hamburgerBtn" class="md:hidden p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green transition" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <button id="themeToggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-nat-green dark:text-yellow-400 transition"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-lg">
+        <div class="px-4 py-3 space-y-1">
+            <a href="index.html#home" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition">Home</a>
+            <a href="index.html#products" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition">Products</a>
+            <a href="index.html#about" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition">About Us</a>
+            <a href="index.html#blog" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition">Wellness</a>
+            <a href="index.html#faq" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition">FAQs</a>
+            <a href="index.html#contact" class="block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-nat-mint dark:hover:bg-gray-700 hover:text-nat-green transition">Contact</a>
+            <a href="#" class="block px-4 py-2.5 rounded-lg text-sm font-semibold bg-nat-mint dark:bg-gray-700 text-nat-green transition">Blog</a>
+        </div>
+    </div>
+
+    <!-- BLOG HERO -->
+    <section class="relative overflow-hidden pt-16 pb-12 lg:pt-20 lg:pb-16 border-b border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block bg-nat-green text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-lg mb-6">Our Journal</div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-nat-green dark:text-white font-bold leading-tight">Wellness Blog</h1>
+            <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">Stories, insights, and deep dives into the natural products that nourish your body and soul. Discover the journey behind every jar, bean, and blend.</p>
+        </div>
+    </section>
+
+    <!-- BLOG POSTS -->
+    <section class="py-16 bg-nat-cream dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+            <!-- Blog Post 1: PURE NATURAL HONEY -->
+            <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-2 h-64 md:h-full">
+                        <img src="https://dcgfcr1p26ggj.cloudfront.net/wp-content/uploads/2025/02/honey-stock.jpg" alt="Pure Natural Honey" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center space-x-2 text-xs text-nat-lightGreen font-bold">
+                            <span class="uppercase tracking-wider">Product Spotlight</span>
+                            <span>•</span>
+                            <span class="text-gray-400 font-mono">June 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-nat-green dark:text-white">Pure Natural Honey</h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Pure natural honey collected from farms. Used for tea, bread, health benefits, and natural sweetening.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Our pure natural honey is raw, unfiltered, and sourced straight from sustainable hives in Ethiopia. Rich in natural antioxidants and enzymes perfect for organic sweetening targets. Every jar captures the essence of wildflower nectar, delivering a taste that processed honey simply cannot match. Whether drizzled over warm oats, stirred into tea, or enjoyed by the spoonful, this honey brings the purity of Ethiopian highlands straight to your table.</p>
+                        <div class="bg-nat-mint/50 dark:bg-gray-900/50 rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50">
+                            <p class="text-xs text-gray-600 dark:text-gray-400"><strong class="text-nat-green">Price:</strong> <span class="font-mono font-bold">450 ETB</span> <span class="line-through text-gray-400 ml-2">500 ETB</span> <span class="text-orange-500 font-bold ml-1">(10% OFF)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 2: FRESH COFFEE BEANS -->
+            <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-2 h-64 md:h-full md:order-2">
+                        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=200&q=80" alt="Fresh Coffee Beans" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 sm:p-8 space-y-4 md:order-1">
+                        <div class="flex items-center space-x-2 text-xs text-nat-lightGreen font-bold">
+                            <span class="uppercase tracking-wider">Product Spotlight</span>
+                            <span>•</span>
+                            <span class="text-gray-400 font-mono">June 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-nat-green dark:text-white">Fresh Coffee Beans</h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Fresh roasted coffee beans with rich aroma and strong flavor for home or caf√© use.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Carefully roasted Arabica structural beans profile providing an exceptional flavor complexity. Perfect morning start and energetic metabolic acceleration support profile. Sourced from Ethiopia's finest highland farms, each batch is roasted to perfection, unlocking notes of citrus, chocolate, and a silky smooth finish. For the true coffee connoisseur, this is the bean that transforms your daily ritual into a moment of pure indulgence.</p>
+                        <div class="bg-nat-mint/50 dark:bg-gray-900/50 rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50">
+                            <p class="text-xs text-gray-600 dark:text-gray-400"><strong class="text-nat-green">Price:</strong> <span class="font-mono font-bold">595 ETB</span> <span class="line-through text-gray-400 ml-2">700 ETB</span> <span class="text-orange-500 font-bold ml-1">(15% OFF)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 3: HERBAL TEA -->
+            <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-2 h-64 md:h-full">
+                        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80" alt="Herbal Tea" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center space-x-2 text-xs text-nat-lightGreen font-bold">
+                            <span class="uppercase tracking-wider">Product Spotlight</span>
+                            <span>•</span>
+                            <span class="text-gray-400 font-mono">June 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-nat-green dark:text-white">Herbal Tea</h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Healthy herbal tea made from natural ingredients to support relaxation and wellness.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">A pristine herbal blend containing loose dried chamomile leaves and therapeutic farm botanicals configured specifically to lower evening stress variables safely. Each cup is a gentle embrace of nature, carefully formulated to calm the mind and soothe the body. Perfect for winding down after a long day, this tea is your nightly invitation to pause, breathe, and restore your inner balance naturally.</p>
+                        <div class="bg-nat-mint/50 dark:bg-gray-900/50 rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50">
+                            <p class="text-xs text-gray-600 dark:text-gray-400"><strong class="text-nat-green">Price:</strong> <span class="font-mono font-bold">240 ETB</span> <span class="line-through text-gray-400 ml-2">300 ETB</span> <span class="text-orange-500 font-bold ml-1">(20% OFF)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 4: NATURAL PEANUT BUTTER -->
+            <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-2 h-64 md:h-full md:order-2">
+                        <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=200&q=80" alt="Natural Peanut Butter" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 sm:p-8 space-y-4 md:order-1">
+                        <div class="flex items-center space-x-2 text-xs text-nat-lightGreen font-bold">
+                            <span class="uppercase tracking-wider">Product Spotlight</span>
+                            <span>•</span>
+                            <span class="text-gray-400 font-mono">June 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-nat-green dark:text-white">Natural Peanut Butter</h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Natural peanut butter with high protein content, suitable for breakfast and snacks.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Zero added industrial vegetable oils or refined high fructose corn syrups. Straight roasted premium ground peanuts balanced with a tiny fraction of natural sea salt. Every jar is a testament to simplicity, delivering pure, unadulterated peanut flavor with a creamy texture that spreads effortlessly. Packed with protein and healthy fats, it is the perfect fuel for your busy mornings or post-workout refuel.</p>
+                        <div class="bg-nat-mint/50 dark:bg-gray-900/50 rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50">
+                            <p class="text-xs text-gray-600 dark:text-gray-400"><strong class="text-nat-green">Price:</strong> <span class="font-mono font-bold">427.50 ETB</span> <span class="line-through text-gray-400 ml-2">450 ETB</span> <span class="text-orange-500 font-bold ml-1">(5% OFF)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 5: NATURAL SPICE MIX -->
+            <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-2 h-64 md:h-full">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=200&q=80" alt="Natural Spice Mix" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center space-x-2 text-xs text-nat-lightGreen font-bold">
+                            <span class="uppercase tracking-wider">Product Spotlight</span>
+                            <span>•</span>
+                            <span class="text-gray-400 font-mono">June 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-nat-green dark:text-white">Natural Spice Mix</h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Mixed natural cooking spices for preparing traditional and modern dishes.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Traditional multi-purpose blend composed of organic red pepper, garlic, and unique farm botanicals designed to elevate local stews or general seasoning requirements. This carefully curated mix brings the vibrant flavors of Ethiopian cuisine to your kitchen, combining warmth, depth, and a gentle heat that dances on the palate. Whether you are preparing a traditional wat or experimenting with fusion dishes, this spice mix is your secret weapon.</p>
+                        <div class="bg-nat-mint/50 dark:bg-gray-900/50 rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50">
+                            <p class="text-xs text-gray-600 dark:text-gray-400"><strong class="text-nat-green">Price:</strong> <span class="font-mono font-bold">220 ETB</span> <span class="line-through text-gray-400 ml-2">250 ETB</span> <span class="text-orange-500 font-bold ml-1">(12% OFF)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- BACK TO STORE CTA -->
+    <section class="py-12 bg-white dark:bg-gray-800 border-t border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <h2 class="text-2xl font-serif font-bold text-nat-green dark:text-white">Ready to Experience These Products?</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Visit our store to explore the full catalog and place your order for home delivery across Addis Ababa.</p>
+            <a href="index.html#products" class="inline-block px-8 py-3 rounded-xl bg-nat-green text-white font-bold text-sm shadow-md uppercase tracking-wider hover:opacity-90 transition">Browse Products</a>
+        </div>
+    </section>
+
+    <footer class="bg-nat-mint dark:bg-gray-950 py-10 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+            <p class="text-nat-green dark:text-white font-bold tracking-wide uppercase">Natural Home & Wellness Store — Healthy Products | Happy Life</p>
+            <p>Presented by: <strong>Solomon Tasew</strong> | Email: <strong>solomonqiyas@gmail.com</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                const htmlTag = document.documentElement;
+                const themeIcon = document.getElementById('themeIcon');
+                if (htmlTag.classList.contains('dark')) {
+                    htmlTag.classList.remove('dark');
+                    themeIcon.className = "fa-solid fa-moon";
+                } else {
+                    htmlTag.classList.add('dark');
+                    themeIcon.className = "fa-solid fa-sun";
+                }
+            });
+
+            // Hamburger menu toggle
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = hamburgerBtn.querySelector('i');
+                    icon.className = "fa-solid fa-bars";
+                });
+            });
+        });
+    </script>
+</body>
+</html>
